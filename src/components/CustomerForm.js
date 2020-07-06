@@ -120,7 +120,7 @@ class CustomerForm extends React.Component {
                             .catch(err => console.log(err))
                     })
                     .catch(err => {
-                        this.setState({
+                        this.setState({ 
                             requestPending: false
                         })
                         if (err.response && err.response.status === 422) {
