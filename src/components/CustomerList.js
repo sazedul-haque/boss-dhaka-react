@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { getCustomerList } from '../store/actions/customerActions';
+import Pagination from './Pagination';
 import axios from '../utils/axios';
 
 import { ErrorOutline, Error } from '@material-ui/icons';
@@ -28,7 +29,7 @@ class CustomerList extends React.Component {
         })
         axios.get('/auth/customers/')
             .then(res => {
-                this.props.getCustomerList(res.data.data);
+                this.props.getCustomerList(res.data);
                 this.setState({
                     pagePending: false,
                     pageError: null
@@ -50,7 +51,7 @@ class CustomerList extends React.Component {
             .then(res => {
                 axios.get(`/auth/customers`)
                     .then(res => {
-                        this.props.getCustomerList(res.data.data);
+                        this.props.getCustomerList(res.data);
                     })
                     .catch(err => {
                         console.log(err);
@@ -66,6 +67,18 @@ class CustomerList extends React.Component {
                     requestPending: false
                 })
             })
+    }
+
+    pageChange = (page) => {
+        if (page) {
+            axios.get(`/auth/customers?page=${page}`)
+                .then(res => {
+                    this.props.getCustomerList(res.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
     }
 
     render() {
@@ -110,7 +123,7 @@ class CustomerList extends React.Component {
                             </thead>
                             <tbody>
                                 {
-                                    customers.map(customer =>
+                                    customers.data.map(customer =>
                                         <tr key={customer._id}>
                                             <td>{customer.name}</td>
                                             <td>{customer.email}</td>
@@ -127,6 +140,20 @@ class CustomerList extends React.Component {
                                 }
                             </tbody>
                         </table>
+                    </div>
+                    <div className="row">
+                        <div className="offset-md-6 col-sm-6">
+                            {
+                                customers.pages > 1 &&
+                                <Pagination
+                                    previous={customers.previous}
+                                    next={customers.next}
+                                    total_page={customers.pages}
+                                    current_page={customers.currentPage}
+                                    pageChange={this.pageChange}
+                                 />
+                            }
+                        </div>
                     </div>
                 </div>
                 {
