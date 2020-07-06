@@ -112,7 +112,12 @@ class CustomerForm extends React.Component {
                         this.setState({
                             requestPending: false
                         })
-                        this.props.history.push('/customers');
+                        axios.get('/auth/logs/unseen')
+                            .then(res => {
+                                this.props.getNotificationNo(res.data.data)
+                                this.props.history.push('/customers');
+                            })
+                            .catch(err => console.log(err))
                     })
                     .catch(err => {
                         this.setState({
