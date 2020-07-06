@@ -1,0 +1,45 @@
+header{
+    background-color: #ffffff;
+    box-shadow: 2px 4px 20px -4px rgba(0,0,0,.1);
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    padding-left: 270px;
+    @include breakpoint(tablet){
+        padding-left: 20px;
+        z-index: 9999;
+    }
+    ul{
+        &.menu-right{
+            text-align: right;
+        }
+        li{
+            list-style: none;
+            display: inline-block;
+            cursor: pointer;
+            margin-right: 20px;
+            &:last-child{
+                margin-right: 0px;
+            }
+            &.toggle-menu{
+                display: none;
+                @include breakpoint(tablet){
+                    display: inline-block   ;
+                }
+            }
+            a{
+                color: $text-color;
+                text-decoration: none;
+                position: relative;
+                .badge{
+                    position: absolute;
+                    top: -2px;
+                    right: -7px;
+                }
+            }
+        }
+    }
+}

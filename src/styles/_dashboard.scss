@@ -1,0 +1,43 @@
+.dashboard{
+    .dashboard-title{
+        font-weight: 400;
+        text-transform: uppercase;
+        line-height: 2;
+    }
+    .dashboard-item{
+        box-shadow: 0 10px 40px 0 rgba(62,57,107,.07), 0 2px 9px 0 rgba(62,57,107,.06);
+        padding: 30px;
+        margin-bottom: 30px;
+        background-color: #ffffff;
+    }
+}
+
+.table{
+    th{
+        font-weight: 500;
+        select{
+            padding: 0px 10px;
+            font-weight: 500;
+            border-color: $text-color;
+            border-radius: 3px;
+            outline: none;
+        }
+    }
+    td{
+        vertical-align: middle;
+        white-space: nowrap;
+        &.image{
+            width: 80px;
+        }
+        &.price{
+            &.discount{
+                color: $red;
+                span{
+                    text-decoration: line-through;
+                    color: $text-color;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

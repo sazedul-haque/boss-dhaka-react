@@ -1,0 +1,109 @@
+.sidebar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #404E67;
+    width: 240px;
+    height: 100%;
+    padding-top: 64px;
+    z-index: 999;
+    transition: .3s;
+    @include breakpoint(tablet){
+        left: -240px;
+    }
+    .logo{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 54px;
+        text-align: center;
+        font-size: 26px;
+        line-height: 2;
+        font-weight: 500;
+        color: #fff;
+        @include box-shadow(2px 4px 20px -4px rgba(0, 0, 0, 0.1));
+    }
+    .sidebar-menu{
+        height: 100%;
+        overflow-y: scroll;
+        li{
+            list-style: none;
+            a{
+                display: block;
+                color: #DCDCDC;
+                padding: 12px 15px;
+                text-decoration: none;
+                line-height: 26px;
+                cursor: pointer;
+                .icon-left{
+                    float: left;
+                    margin-right: 6px;
+                }
+                .icon-right {
+                    float: right;
+                    font-size: 16px;
+                    margin-top: 3px;
+                    transition: .35s;
+                }
+                &:hover{
+                    background-color: #344054;
+                    color: #dcdcdc;
+                }
+            }
+            &.active > a{
+                background-color: #344054;
+                color: $base-color;
+            }
+            .sub-menu{
+                max-height: 0;
+                transition: max-height .2s ease-out;
+                overflow: hidden;
+                position: relative;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    height: 181px;
+                    left: 25px;
+                    top: 0;
+                    border-left: 1px dashed rgba(255, 255, 255, 0.3);
+                    z-index: 9;
+                }
+                a{
+                    background-color: transparent;
+                    padding: 7px 15px 7px 45px;
+                    position: relative;
+                    &:hover{
+                        background-color: #344054;
+                    }
+                    &::before{
+                        content: "";
+                        position: absolute;
+                        width: 16px;
+                        left: 25px;
+                        top: 20px;
+                        border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+                    }
+                }
+            }
+            &.has-sub{
+                > a{
+                    .icon-right{
+                        transform: rotate(90deg);
+                    }
+                }
+                .sub-menu{
+                    max-height: 250px;
+                }
+            }
+        }
+    }
+}
+.open-sidebar{
+    @include breakpoint(tablet){
+        .sidebar {
+            left: 0px;
+        }
+    }
+    
+}
